@@ -1,2 +1,429 @@
-# kah
-para você
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kareca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .font-title {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Animação de pulso suave para o botão de entrada */
+        .pulse-glow {
+            box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(236, 72, 153, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+            }
+        }
+        /* Animação para Madoka flutuar suavemente */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translatey(0px); }
+            50% { transform: translatey(-20px); }
+            100% { transform: translatey(0px); }
+        }
+        /* Estilo para a barra de rolagem */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #a855f7;
+            border-radius: 20px;
+            border: 3px solid #1a1a1a;
+        }
+
+        /* Estilo para a flor no modal */
+        .flower-shape {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><path id="petal" d="M100 0 C150 50 150 150 100 200 C50 150 50 50 100 0 Z"/></defs><use href="%23petal" transform="rotate(0 100 100)"/><use href="%23petal" transform="rotate(45 100 100)"/><use href="%23petal" transform="rotate(90 100 100)"/><use href="%23petal" transform="rotate(135 100 100)"/><use href="%23petal" transform="rotate(180 100 100)"/><use href="%23petal" transform="rotate(225 100 100)"/><use href="%23petal" transform="rotate(270 100 100)"/><use href="%23petal" transform="rotate(315 100 100)"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><path id="petal" d="M100 0 C150 50 150 150 100 200 C50 150 50 50 100 0 Z"/></defs><use href="%23petal" transform="rotate(0 100 100)"/><use href="%23petal" transform="rotate(45 100 100)"/><use href="%23petal" transform="rotate(90 100 100)"/><use href="%23petal" transform="rotate(135 100 100)"/><use href="%23petal" transform="rotate(180 100 100)"/><use href="%23petal" transform="rotate(225 100 100)"/><use href="%23petal" transform="rotate(270 100 100)"/><use href="%23petal" transform="rotate(315 100 100)"/></svg>');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-size: cover; /* Para a imagem de fundo */
+            background-position: center;
+            border-radius: 0; /* Desabilita o border-radius padrão para usar a máscara */
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.4); /* Sombra mais vibrante */
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+
+    <!-- ADICIONE SEU ARQUIVO DE MÚSICA AQUI --> 
+    <!-- Troque 'sua-musica.mp3' pelo nome do seu arquivo de áudio --> 
+    <audio id="background-music" loop src="music.mp3"></audio>
+
+    <!-- Tela de Entrada --> 
+    <div id="entry-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 transition-opacity duration-1000">
+        <h1 class="font-title text-4xl md:text-6xl mb-4 text-pink-400">Olá!</h1>
+        <p class="mb-8 text-gray-300">Olá, receba isso como um presente, vou tentar sempre manter este local atualizado para que você se sinta especial da maneira que eu te vejo</p>
+        <button id="enter-button" class="bg-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-600 transition-all duration-300 pulse-glow">
+            Entrar
+        </button>
+    </div>
+
+    <!-- Conteúdo Principal --> 
+    <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000">
+        <!-- Imagem da Madoka --> 
+        <div class="absolute top-0 right-0 w-1/3 md:w-1/4 max-w-xs opacity-30 -z-10">
+            <img src="https://i.pinimg.com/originals/9a/5b/6a/9a5b6a3832c3a3be3b6796c5b9da32f0.png" 
+                 alt="Personagem Madoka Kaname flutuando" 
+                 class="float"
+                 onerror="this.style.display='none'">
+        </div>
+
+        <header class="h-screen flex items-center justify-center text-center">
+            <div>
+                <h1 class="font-title text-6xl md:text-8xl lg:text-9xl text-white drop-shadow-lg shadow-pink-500/50">Para Kamilly💫.</h1>
+                <p class="mt-4 text-purple-300">Salve! Vou deixar abaixo os textos que escrevi para você e vou tentar escrever algumas cartas para você por aqui, ok?
+    </p>
+            </div>
+        </header>
+
+        <section class="min-h-screen container mx-auto px-6 py-20 flex flex-col items-center justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Planejo melhorar isso.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+                <!-- Botão 1: Carta --> 
+                <button id="letter-button" class="bg-purple-600/20 backdrop-blur-sm border border-purple-500 text-white rounded-lg p-8 text-center hover:bg-purple-500/30 hover:border-purple-400 transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-2">Primeira Carta.</h3>
+                    <p class="text-purple-200">O Inicio.</p>
+                </button>
+                <!-- Botão 2: Fotos --> 
+                <button id="gallery-button" class="bg-pink-600/20 backdrop-blur-sm border border-pink-500 text-white rounded-lg p-8 text-center hover:bg-pink-500/30 hover:border-pink-400 transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-2">Fotos de coisas que te agradam.</h3>
+                    <p class="text-pink-200">Só coloquei algumas, pretendo colocar algo diferente.</p>
+                </button>
+                <!-- Botão 3: Criativo --> 
+                <button id="stars-button" class="bg-gray-600/20 backdrop-blur-sm border border-gray-500 text-white rounded-lg p-8 text-center hover:bg-gray-500/30 hover:border-gray-400 transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-2">Segunda Carta.</h3>
+                    <p class="text-gray-200">Um fundo diferente para tentar deixar o local melhor.</p>
+                </button>
+                <!-- Botão 4: Casal (Novo) --> 
+                <button id="couple-button" class="bg-red-600/20 backdrop-blur-sm border border-red-500 text-white rounded-lg p-8 text-center hover:bg-red-500/30 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2">
+                     <h3 class="text-2xl font-bold mb-2">Carta Número 3</h3>
+                    <p class="text-red-200">Os pensamentos me confundem.</p>
+                </button>
+                <!-- Botão 5: Flor Secreta (Novo) --><button id="flower-button" class="bg-emerald-600/20 backdrop-blur-sm border border-emerald-500 text-white rounded-lg p-8 text-center hover:bg-emerald-500/30 hover:border-emerald-400 transition-all duration-300 transform hover:-translate-y-2">
+                    <h3 class="text-2xl font-bold mb-2">Tulipas.</h3>
+                    <p class="text-emerald-200">Pq elas?</p>
+                </button>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal: Carta --> 
+    <div id="letter-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-40 hidden">
+        <div class="bg-black border border-purple-400 rounded-lg max-w-2xl w-full p-8 relative shadow-2xl shadow-purple-500/20">
+            <button id="close-letter-modal" class="absolute top-4 right-4 text-2xl text-white hover:text-purple-300">&times;</button>
+            <h2 class="font-title text-3xl mb-4 text-purple-300">Primeira Carta.</h2>
+            <p class="text-gray-300 leading-relaxed">
+    Olá! Vim aqui tentar amigar com você
+    <br>
+    Tudo bem?
+    <br>
+    inicialente vou me apresentar, me chamo Ryan mas tem um povo que me chama de paçoca! (admito que gosto mais.), geralmente eu to sempre jogando vôlei e você aparece, me desculpe por reparar tanto.
+    <br>  
+    Por mas que não pareça sou bem timido, desculpe por não conversar pessoalmente.
+    <br>
+    Enfim!Não sei muito o que escrever para você então vou apenas deixar alguns desenhos bem bosta aqui em baixo para preencher o vazio! Se quiser amigar  ou conversar só ir falar comigo ou pedir meu número pra Larissa, Uma ótima semana  pra você! 
+    <br>
+    (Não sei se escrevi direito)
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal: Galeria --> 
+    <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-40 hidden">
+        <div class="bg-black border border-pink-400 rounded-lg max-w-4xl w-full p-8 relative shadow-2xl shadow-pink-500/20">
+            <button id="close-gallery-modal" class="absolute top-4 right-4 text-2xl text-white hover:text-pink-300">&times;</button>
+            <h2 class="font-title text-3xl mb-6 text-pink-300 text-center">Coisas que me lembram você!</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-h-[60vh] overflow-y-auto pr-2">
+                <!-- Substitua os links 'src' pelas URLs das suas imagens --> 
+            <img src="cat.png" alt="Foto de memória 1" class="rounded-md w-full h-full object-cover aspect-square hover:opacity-80 transition-opacity">
+
+            <img src="chaeyoung.png" alt="Foto de memória 1" class="rounded-md w-full h-full object-cover aspect-square hover:opacity-80 transition-opacity">
+
+            <img src="kitty.png" alt="Foto de memória 1" class="rounded-md w-full h-full object-cover aspect-square hover:opacity-80 transition-opacity">         
+            
+            </div>
+            <p class="text-center text-sm text-gray-400 mt-4">Pretendo colocar mais coisas depois.</p>
+        </div>
+    </div>
+    
+    <!-- Modal: Estrelas --> 
+    <div id="stars-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-40 hidden">
+        <div class="bg-black border border-gray-400 rounded-lg w-full max-w-4xl h-3/4 relative shadow-2xl shadow-gray-500/20 flex items-center justify-center">
+            <button id="close-stars-modal" class="absolute top-4 right-4 text-2xl text-white hover:text-gray-300 z-20">&times;</button>
+            <canvas id="star-canvas" class="absolute inset-0 w-full h-full rounded-lg"></canvas>
+            <p class="font-title text-white text-1xl md:text-0xl text-center z-10 drop-shadow-lg max-w-md p-4">
+    
+                Oi, bom?
+                <br><br>
+                Enfim, eu sei que disse que falaria pessoalmente, mas eu desisti... 
+                Tanto por vergonha quanto por nervoso.
+                <br><br>
+                Olha, eu queria comentar sobre ontem, sério. 
+                Me desculpa, eu estava super nervoso, 
+                ainda mais naquele momento na frente da biblioteca.
+                <br><br>
+                No momento em que eu ficava olhando pra ti, e tu olhava de volta...
+                Eu juro pra você que eu gelava de nervoso.
+                <br><br>
+                Me perdoa por escrever isso de uma forma talvez direta (e entenda da maneira que quiser), 
+                mas me desculpe por não falar antes e enrolar. 
+                Eu só me sentia nervoso nesses momentos.
+                <br><br>
+                Desculpa.
+                <br><br>
+                - Paçoca
+                <br>
+                05/11/2025
+    
+            </p>
+        </div>
+    </div>
+         <!-- Modal: Casal (Novo) --> 
+        <div id="couple-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-40 hidden">
+         <div class="bg-black border border-red-400 rounded-lg max-w-2xl w-full p-8 relative shadow-2xl shadow-red-500/20 max-h-[90vh] overflow-y-auto">
+             <button id="close-couple-modal" class="absolute top-4 right-4 text-2xl text-white hover:text-red-300">&times;</button>
+             <h2 class="font-title text-3xl mb-4 text-red-300">Minha 3º carta</h2>
+             <div class="text-gray-300 leading-relaxed">
+                 <p class="mb-4">
+                    .
+                 </T>
+                 <p class="text-center italic text-lg text-red-200 my-6">
+                    08 de novembro de 1994
+                     <br>
+                     Oi denovo!
+                     <br>
+                     Tudo bem? 
+                     <br>
+                     enfim, eu sei que já disse isso antes mas vou escrever dessa vez e tentar me expressar melhor, ok?
+                     <br>
+                     Não tive coragem de dizer no dia.
+                     <br>
+                     Kah, eu gosto de você  e eu não sei por que me sinto tão nervoso perto de você, olha, eu gosto do seu jeito, seu cabelo, sua voz, adoro seus olhos principalmente.
+                     <br>
+                     Quando a gente conversa sinto até algumas borboletas no meu estômago, Kamilly, eu me sinto tão estranho perto de você que te peço desculpas se eu for chato ou um incômodo pra você.
+                     <br>
+                     Eu estou sempre pra ti se precisar jogar, conversar, desabafar ou sei lá.
+                     <br>
+                     Bem, eu acho que é isso. Beijos, eu adoro você, Kamilly.
+
+                    <br>
+                    De: Paçoca
+                    <br>
+                    Para: Kamilly💫
+
+                    <br>
+                    escrevi com corpo e alma, desculpe se ficou meloso , acho que é só isso.
+                 </p>
+                 <p>
+                     
+                     <br><br>
+                     
+                 </p>
+             </div>
+         </div>
+    </div>
+
+    <!-- Modal: Flor Secreta (Novo) --><div id="flower-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-40 hidden">
+         <div class="flower-shape bg-emerald-700/30 border border-emerald-400 max-w-2xl w-full h-3/4 relative flex flex-col items-center justify-center p-8 text-center text-white" style="background-image: url('tulipas.png');">
+             <button id="close-flower-modal" class="absolute top-4 right-4 text-2xl text-white hover:text-emerald-300 z-20">&times;</button>
+             <h2 class="font-title text-4xl mb-6 text-emerald-300 drop-shadow-lg z-10">Tulipas</h2>
+             <p class="text-gray-100 leading-relaxed text-lg max-w-md z-10">
+                Eai, tudo bem? Sou eu mais uma vez.
+                <br>
+                Pq as tulipes? A resposta é simples! Elas começaram a me lembrar de você, todos os momento que penso em você me lembro desta flor, e o mesmo vale pra quando lembro desta flor, passo o dia pensando nisso então automaticamente acabo pensando também em você, Eu te amo.
+             </p>
+             <!-- Overlay para garantir legibilidade do texto sobre a imagem --><div class="absolute inset-0 bg-black opacity-30 rounded-lg flower-shape" style="box-shadow: none;"></div>
+         </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos da UI
+            const entryScreen = document.getElementById('entry-screen');
+            const enterButton = document.getElementById('enter-button');
+            const mainContent = document.getElementById('main-content');
+
+            const letterButton = document.getElementById('letter-button');
+            const galleryButton = document.getElementById('gallery-button');
+            const starsButton = document.getElementById('stars-button');
+            const coupleButton = document.getElementById('couple-button'); 
+            const flowerButton = document.getElementById('flower-button'); // Novo botão
+
+            const letterModal = document.getElementById('letter-modal');
+            const galleryModal = document.getElementById('gallery-modal');
+            const starsModal = document.getElementById('stars-modal');
+            const coupleModal = document.getElementById('couple-modal');
+            const flowerModal = document.getElementById('flower-modal'); // Novo modal
+
+            const closeLetterModal = document.getElementById('close-letter-modal');
+            const closeGalleryModal = document.getElementById('close-gallery-modal');
+            const closeStarsModal = document.getElementById('close-stars-modal');
+            const closeCoupleModal = document.getElementById('close-couple-modal');
+            const closeFlowerModal = document.getElementById('close-flower-modal'); // Novo fechar modal
+
+            let musicStarted = false;
+
+            // --- CONTROLE DA MÚSICA DE FUNDO ---
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.volume = 0.3; // Ajuste o volume aqui (0.0 a 1.0)
+
+            // Função para iniciar a música
+            const startMusic = () => {
+                if (!musicStarted) {
+                    backgroundMusic.play().catch(error => console.log("O usuário precisa interagir com a página para tocar a música.", error));
+                    musicStarted = true;
+                    console.log('Música iniciada.');
+                }
+            };
+            
+            // Evento de entrada
+            enterButton.addEventListener('click', () => {
+                startMusic();
+                entryScreen.classList.add('opacity-0');
+                setTimeout(() => {
+                    entryScreen.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    setTimeout(() => mainContent.classList.remove('opacity-0'), 50); // Garante a transição
+                }, 1000);
+            });
+            
+            // Funções para abrir e fechar modais
+            const openModal = (modal) => modal.classList.remove('hidden');
+            const closeModal = (modal) => modal.classList.add('hidden');
+
+            letterButton.addEventListener('click', () => openModal(letterModal));
+            closeLetterModal.addEventListener('click', () => closeModal(letterModal));
+
+            galleryButton.addEventListener('click', () => openModal(galleryModal));
+            closeGalleryModal.addEventListener('click', () => closeModal(galleryModal));
+            
+            starsButton.addEventListener('click', () => {
+                openModal(starsModal);
+                // Inicia a animação das estrelas apenas quando o modal é aberto
+                initStarfield();
+            });
+            closeStarsModal.addEventListener('click', () => {
+                closeModal(starsModal);
+                // Para a animação para economizar recursos
+                if(animationFrameId) cancelAnimationFrame(animationFrameId);
+            });
+            
+            // Novo listener para o modal de casal
+            coupleButton.addEventListener('click', () => openModal(coupleModal));
+            closeCoupleModal.addEventListener('click', () => closeModal(coupleModal));
+
+            // Novo listener para o modal de flor
+            flowerButton.addEventListener('click', () => openModal(flowerModal));
+            closeFlowerModal.addEventListener('click', () => closeModal(flowerModal));
+
+            // Fechar modais ao clicar fora do conteúdo
+            [letterModal, galleryModal, starsModal, coupleModal, flowerModal].forEach(modal => { // Adicionado flowerModal
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal(modal);
+                        if(modal === starsModal && animationFrameId) {
+                            cancelAnimationFrame(animationFrameId);
+                        }
+                    }
+                });
+            });
+
+            // Lógica do Canvas de Estrelas
+            const canvas = document.getElementById('star-canvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            let animationFrameId;
+
+            function initStarfield() {
+                // Ajusta o tamanho do canvas ao do container
+                const parent = canvas.parentElement;
+                if (!parent) return; // Garante que o parente exista
+                
+                canvas.width = parent.clientWidth;
+                canvas.height = parent.clientHeight;
+                
+                stars = [];
+                const numStars = window.innerWidth > 768 ? 150 : 75; // Menos estrelas em telas menores
+                for (let i = 0; i < numStars; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.5,
+                        alpha: Math.random() * 0.5 + 0.5, // Opacidade varia
+                        dx: Math.random() * 0.2 - 0.1,
+                        dy: Math.random() * 0.2 - 0.1
+                    });
+                }
+                
+                // Cancela o frame anterior se houver um
+                if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                animateStars();
+            }
+
+            function drawStars() {
+                if(!ctx) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => {
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                    ctx.fill();
+                });
+            }
+
+            function updateStars() {
+                stars.forEach(star => {
+                    star.x += star.dx;
+                    star.y += star.dy;
+
+                    if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+                    if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+                });
+            }
+
+            function animateStars() {
+                drawStars();
+                updateStars();
+                animationFrameId = requestAnimationFrame(animateStars);
+            }
+            
+            // Redimensiona o canvas de estrelas se a janela mudar de tamanho
+            window.addEventListener('resize', () => {
+                if(!starsModal.classList.contains('hidden')){
+                    initStarfield();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
